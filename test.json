@@ -1,0 +1,35 @@
+{
+	"1": {
+		"num_answers": 4,
+		"content": "Which of the following National Fire Protection Association standards provides a code for high power rocketry?",
+		"A": "NFPA 1122",
+		"B": "NFPA 1124",
+		"C": "NFPA 1125",
+		"D": "NFPA 1127",
+		"answer": "D",
+		"explanation": "NFPA 1127 is the Code for High Power Rocketry. NFPA 1122 is the Code for Model Rocketry; NFPA 1124 is the Code for the Manufacture, Transportation, and Storage of Fireworks; NFPA 1125 is the Code for the Manufacture of Model Rocket and High Power Rocket Motors.",
+		"source": "NAR Level 2 Exam Question Pool"
+	},
+	"2": {
+		"num_answers": 4,
+		"content": "What part of the Federal Aviation Regulations govern rocket activity?",
+		"A": "Part 95",
+		"B": "Part 97",
+		"C": "Part 101",
+		"D": "Part 125",
+		"answer": "C",
+		"explanation": "Rocket activity is codified in Part 101, Moored Balloons, Kites, Unmanned Rockets, and Unmanned Free Balloons. ",
+		"source": "NAR Level 2 Exam Question Pool"
+	},
+	"3": {
+		"num_answers": 4,
+		"content": "What is the maximum launch weight allowable for a rocket which does not require FAA waiver?",
+		"A": "4 ounces (113 grams)",
+		"B": "4.4 ounces (125 grams)",
+		"C": "1 pound (453 grams)",
+		"D": "3.3 pounds (1500 grams)",
+		"answer": "D",
+		"explanation": "Part 101 no longer requires a waiver for the operation of model rocket (class 1 rockets) weighing less than 3.3 pounds (1500 grams).",
+		"source": "NAR Level 2 Exam Question Pool"
+	}
+}
