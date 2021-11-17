@@ -8,6 +8,10 @@ import json
 import random
 import shelve
 import requests
+#import logging
+
+#logging.basicConfig(level=logging.INFO)
+
 
 ANSWER_CHOICES = ["A", "B", "C", "D", "E", "F", "G", "H"]
 TEST_BANK_JSON = open('/root/rocketBot/test.json', encoding="utf8")
@@ -119,6 +123,28 @@ def daily_update():
 @bot.event
 async def on_message(message):
     """Async callback run on every message the bot sees"""
+    if message.author.id == 621107119781052426 and isinstance(message.channel, discord.abc.GuildChannel) and "sorry" in message.content.lower():
+        emoji = bot.get_emoji(873442529297723413)
+        await message.add_reaction(emoji)
+
+    if "duel deploy"in message.content.lower():
+        emoji = '⚔️'
+        await message.add_reaction(emoji)
+
+    if "ope"in message.content.lower():
+        emoji = bot.get_emoji(751215601229234237)
+        await message.add_reaction(emoji)
+
+    if "mabey"in message.content.lower():
+        emoji = bot.get_emoji(873043099578953758)
+        await message.add_reaction(emoji)
+
+    if "cheep" in message.content.lower():
+        emoji = '🐦'
+        await message.add_reaction(emoji)
+
+
+
 
     # Private DMs
     if isinstance(message.channel, discord.abc.PrivateChannel) and message.author.id != bot.user.id:
@@ -234,8 +260,7 @@ async def check_fsm_stock():
 
 @post_question.before_loop
 async def before_post_question():
-    """ Stalls question posting until 12:15.  (Really only used for first loop, after that the 24 hour pause works)"""
-    hour = 12
+    hour = 16
     minute = 15
     await bot.wait_until_ready()
     now = datetime.now()
@@ -247,8 +272,7 @@ async def before_post_question():
 
 @post_answer.before_loop
 async def before_post_answer():
-    """ Stalls answer posting until 12:00.  (Really only used for first loop, after that the 24 hour pause works)"""
-    hour = 12
+    hour = 16
     minute = 0
     await bot.wait_until_ready()
     now = datetime.now()
