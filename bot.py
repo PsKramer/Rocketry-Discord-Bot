@@ -127,15 +127,15 @@ async def on_message(message):
         emoji = bot.get_emoji(873442529297723413)
         await message.add_reaction(emoji)
 
-    if "duel deploy"in message.content.lower():
+    if "duel deploy" in message.content.lower():
         emoji = '⚔️'
         await message.add_reaction(emoji)
 
-    if "ope"in message.content.lower():
+    if "ope" in message.content.lower():
         emoji = bot.get_emoji(751215601229234237)
         await message.add_reaction(emoji)
 
-    if "mabey"in message.content.lower():
+    if "mabey" in message.content.lower():
         emoji = bot.get_emoji(873043099578953758)
         await message.add_reaction(emoji)
 
