@@ -72,7 +72,7 @@ def generate_question_message(question_id, include_answer=False):
     return response
 
 
-def generate_answer_message(question_id):
+def generate_answer_message(question_id) -> str:
     """ Generates a markdown formatted message for the answer of yesterday's question.
     Generates an answer distribution from the database's collected answers and saves it to 'answer_distribution.png'
 
@@ -101,6 +101,7 @@ def process_answer(answer_choice):
     DB["collected_answers"][answer_choice] += 1
     DB.sync()
 
+
 def daily_update():
     """Daily update function - picks a new question and resets the collected answers counts"""
     if "remaining_questions" not in DB or len(DB["remaining_questions"]) is 0:
@@ -120,13 +121,11 @@ def daily_update():
     DB["users_who_answered"] = []
     DB.sync()
 
-
-@bot.event
-async def on_message(message):
-    """Async callback run on every message the bot sees"""
-
+async def auto_react(message):
+    """Auto reacts on message content"""
+    # Emma no sorry
     if message.author.id == 621107119781052426 and isinstance(message.channel, discord.abc.GuildChannel) \
-            and "sorry" in message.content.lower():
+            and re.search(r'\bsorry\b', message.content.lower()):
         emoji = bot.get_emoji(873442529297723413)
         await message.add_reaction(emoji)
 
@@ -142,7 +141,7 @@ async def on_message(message):
         emoji = bot.get_emoji(873043099578953758)
         await message.add_reaction(emoji)
 
-    if re.search(r'\bduel deploy\b', message.content.lower()):
+    if re.search(r'\bcheep\b', message.content.lower()):
         emoji = '🐦'
         await message.add_reaction(emoji)
 
@@ -151,8 +150,10 @@ async def on_message(message):
         emoji = '🚩'
         await message.add_reaction(emoji)
 
-
-
+@bot.event
+async def on_message(message):
+    """Async callback run on every message the bot sees"""
+    await auto_react(message)
 
     # Private DMs
     if isinstance(message.channel, discord.abc.PrivateChannel) and message.author.id != bot.user.id:
@@ -169,6 +170,7 @@ async def on_message(message):
             DB["users_who_answered"].append(message.author.id)
             DB.sync()
             await message.channel.send('Answer recorded, check the server later for the correct answer!')
+
 
 
 @bot.event
