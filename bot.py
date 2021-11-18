@@ -8,6 +8,7 @@ import json
 import random
 import shelve
 import requests
+import re
 #import logging
 
 #logging.basicConfig(level=logging.INFO)
@@ -123,24 +124,31 @@ def daily_update():
 @bot.event
 async def on_message(message):
     """Async callback run on every message the bot sees"""
-    if message.author.id == 621107119781052426 and isinstance(message.channel, discord.abc.GuildChannel) and "sorry" in message.content.lower():
+
+    if message.author.id == 621107119781052426 and isinstance(message.channel, discord.abc.GuildChannel) \
+            and "sorry" in message.content.lower():
         emoji = bot.get_emoji(873442529297723413)
         await message.add_reaction(emoji)
 
-    if "duel deploy" in message.content.lower():
-        emoji = '⚔️'
+    if re.search(r'\bduel deploy\b', message.content.lower()):
+        emoji = '⚔'
         await message.add_reaction(emoji)
 
-    if "ope" in message.content.lower():
+    if re.search(r'\bope\b', message.content.lower()):
         emoji = bot.get_emoji(751215601229234237)
         await message.add_reaction(emoji)
 
-    if "mabey" in message.content.lower():
+    if re.search(r'\bmabey\b', message.content.lower()):
         emoji = bot.get_emoji(873043099578953758)
         await message.add_reaction(emoji)
 
-    if "cheep" in message.content.lower():
+    if re.search(r'\bduel deploy\b', message.content.lower()):
         emoji = '🐦'
+        await message.add_reaction(emoji)
+
+    if re.search(r'\bking of random\b', message.content.lower()) or re.search(r'\btkor\b', message.content.lower()) \
+            or (re.search(r'\bfirst rocket\b', message.content.lower()) and re.search(r'\bliquid\b', message.content.lower())):
+        emoji = '🚩'
         await message.add_reaction(emoji)
 
 
@@ -154,7 +162,9 @@ async def on_message(message):
             await message.channel.send(response)
 
         # Process answer for the day's question
-        elif message.author.id not in DB['users_who_answered'] and message.content.upper().replace('"', '').replace('\'', '')[0] in ANSWER_CHOICES[0:len(DB['collected_answers'])]:
+        elif message.author.id not in DB['users_who_answered'] \
+                and message.content.upper().replace('"', '').replace('\'', '')[0] \
+                in ANSWER_CHOICES[0:len(DB['collected_answers'])]:
             process_answer(message.content.upper()[0])
             DB["users_who_answered"].append(message.author.id)
             DB.sync()
@@ -195,7 +205,8 @@ async def post_answer():
 
 @tasks.loop(seconds=15)
 async def check_slcf_stock():
-    """Task to check if SLCF is in stock.  Active while SLCF is OUT of stock, sending a message once it becomes IN stock"""
+    """Task to check if SLCF is in stock.  Active while SLCF is OUT of stock, sending a message once it becomes IN
+    stock """
     await bot.wait_until_ready()
 
     url = 'https://www.perfectflitedirect.com/stratologgercf-altimeter/'
@@ -217,7 +228,8 @@ async def check_slcf_stock():
 
 @tasks.loop(seconds=15)
 async def check_slcf_oostock():
-    """Task to check if SLCF is out of stock.  Active while SLCF is IN stock, sending a message once it becomes OUT of stock"""
+    """Task to check if SLCF is out of stock.  Active while SLCF is IN stock, sending a message once it becomes OUT
+    of stock """
     url = 'https://www.perfectflitedirect.com/stratologgercf-altimeter/'
     slcf_obj = requests.get(url)
 
