@@ -141,7 +141,7 @@ async def auto_react(message):
         emoji = bot.get_emoji(873043099578953758)
         await message.add_reaction(emoji)
 
-    if re.search(r'\bcheep\b', message.content.lower()):
+    if re.search(r'\bcheep(er|est)?\b', message.content.lower()):
         emoji = '🐦'
         await message.add_reaction(emoji)
 
