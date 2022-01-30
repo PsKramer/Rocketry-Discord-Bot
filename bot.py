@@ -146,6 +146,7 @@ async def auto_react(message):
         await message.add_reaction(emoji)
 
     if re.search(r'\bking of random\b', message.content.lower()) or re.search(r'\btkor\b', message.content.lower()) \
+            or re.search(r'\bintegza\b, message.content.lower()) or 
             or (re.search(r'\bfirst rocket\b', message.content.lower()) and re.search(r'\bliquid\b', message.content.lower())):
         emoji = '🚩'
         await message.add_reaction(emoji)
