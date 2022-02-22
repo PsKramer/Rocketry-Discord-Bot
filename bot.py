@@ -125,7 +125,7 @@ async def auto_react(message):
     """Auto reacts on message content"""
     # Emma no sorry
     if message.author.id == 621107119781052426 and isinstance(message.channel, discord.abc.GuildChannel) \
-            and re.search(r'\bsorry\b', message.content.lower()):
+            and re.search(r'\bsorry\b|should i feel', message.content.lower()):
         emoji = bot.get_emoji(873442529297723413)
         await message.add_reaction(emoji)
 
